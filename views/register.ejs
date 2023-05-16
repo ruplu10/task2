@@ -1,15 +1,17 @@
 <form method="POST" action="/register" enctype="multipart/form-data">
-  <label for="firstName">First Name:</label>
-  <input type="text" name="firstName" required>
+  <label for="firstnName">First Name:</label>
+  <input type="text" name="firstname" required>
   <br>
   <label for="lastName">Last Name:</label>
-  <input type="text" name="lastName" required>
+  <input type="text" name="lastname" required>
   <br>
-  <label for="userName">Username:</label>
-  <input type="text" name="userName" required>
+
+
+  <label for="password">Password:</label>
+  <input type="password" name="password" required>
   <br>
   <label for="profilePicture">Profile Picture:</label>
-  <input type="file" name="profilePicture" accept="image/*" required>
+  <input type="file" name="profile_picture" accept="image/*" >
   <br>
   <input type="submit" value="Register">
 </form>
