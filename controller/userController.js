@@ -1,14 +1,13 @@
-// const User = require('../model/User');
-// const usersMap = new Map();
 
 const { pool } = require("../db");
-
+const jsonwebtoken = require('jsonwebtoken')
+const JWT_SECRET = '21ddddaadadf'
 exports.getRegister = (req, res) => {
   res.render('register');
 };
-
-
-  // const user = new User(firstName, lastName, userName, profilePicture);
+exports.getLogin = (req, res) => {
+  res.render('login');
+};
 
 exports.postRegister = (req, res) => {
 const profile_picture = req.file.filename
@@ -24,15 +23,7 @@ const value = [firstname,lastname,password,profile_picture]
   } else {
     console.log('Data inserted successfully');
     const user = result.rows[0]
-    res.render('user',{user})
-    // res.send('Data inserted successfully');
-  }
-});
-}
-
-  // res.redirect(`/user/${user.userName}`);
-;
-
+    res.render('user',{user})  }});};
 exports.getUser = (req, res) => {
   const { userName } = req.params;
 
@@ -46,3 +37,16 @@ exports.getUser = (req, res) => {
   // Render the user details page with the user object
   res.render('user', { user: newUser });
 };
+exports.postLogin = async (req, res) => {
+// console.log('login page');
+const {firstname,password} = req.body;
+// res.send(req.body)
+
+if (firstname == 'admin' && password == 'admin'){
+  const token = jsonwebtoken.sign({firstname}, JWT_SECRET)
+  console.log(token);
+  return res.status(200).json({success: true, token, message: 'Authentication success'})
+}
+return res.status(401).send('Invalid')
+}
+
